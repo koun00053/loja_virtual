@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "684301478694",
+    "project_id": "dagugi-acessorios",
+    "storage_bucket": "dagugi-acessorios.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:684301478694:android:d01e903a087c2d1bf2efe7",
+        "android_client_info": {
+          "package_name": "dagugi.acessorios"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCa85pvNKI8xKeMxHMpyQ6AgXQ7mk4KEEg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

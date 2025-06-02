@@ -1,0 +1,2 @@
+C:/Users/Gustavo Zaros/OneDrive/Desktop/LojaVirtual/loja/android/app/.cxx/Debug/634f4e42/x86/CMakeFiles/edit_cache.dir
+C:/Users/Gustavo Zaros/OneDrive/Desktop/LojaVirtual/loja/android/app/.cxx/Debug/634f4e42/x86/CMakeFiles/rebuild_cache.dir
