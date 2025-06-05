@@ -1,10 +1,16 @@
-import 'package:dagugi_acessorios/src/pages/auth/splash_screen.dart';
+import 'dart:io';
+
 import 'package:dagugi_acessorios/src/pages_routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:dagugi_acessorios/src/pages_routes/app_pages.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async{
+  if (Platform.isAndroid)
+  {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+  }
   runApp(const MyApp());
 }
 

@@ -102,16 +102,16 @@ class _CartTabState extends State<CartTab> {
                             message: 'Pedido não confirmado', isError: true);
                       }
                     },
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18),
+                      ),
+                    ),
                     child: Text(
                       'Concluir pedido',
                       style: TextStyle(
                         fontSize: 18,
                         fontFamily: 'Garamond',
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18),
                       ),
                     ),
                   ),

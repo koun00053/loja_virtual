@@ -4,7 +4,7 @@ import 'package:dagugi_acessorios/src/services/utils_services.dart';
 import 'package:flutter/material.dart';
 
 class ProductScreen extends StatefulWidget {
-  ProductScreen({
+  const ProductScreen({
     super.key,
     required this.item,
   });

@@ -1,6 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/rendering.dart';
-import 'package:dio/src/dio_exception.dart';
 
 abstract class HttpMethods {
   static const String post = 'POST';
@@ -40,7 +38,7 @@ class HttpManager {
 
       ///Retorno do resultado do server backend
       return response.data; //Apenas para forçar a requisição
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       //Retorno do erro do dio request
       return error.response?.data ?? {};
     } catch (error) {

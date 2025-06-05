@@ -1,5 +1,6 @@
 import 'package:add_to_cart_animation/add_to_cart_animation.dart';
 import 'package:add_to_cart_animation/add_to_cart_icon.dart';
+import 'package:dagugi_acessorios/src/models/item_model.dart';
 import 'package:dagugi_acessorios/src/pages/common_widgets/custom_shimmer.dart';
 import 'package:dagugi_acessorios/src/pages/home/components/category_tile.dart';
 import 'package:dagugi_acessorios/src/pages/home/components/item_tile.dart';
@@ -21,7 +22,10 @@ class _HomeTabState extends State<HomeTab> {
 
   late Function(GlobalKey) runAddToCardAnimation;
 
-  void itemSelectedCartAnimations(GlobalKey gkImage) {
+  void itemSelectedCartAnimations(GlobalKey gkImage, ItemModel item) {
+    setState(() {
+      appData.cartItems.add(appData.itemToCartItem(item));  
+    });
     runAddToCardAnimation(gkImage);
   }
 
@@ -89,8 +93,8 @@ class _HomeTabState extends State<HomeTab> {
                 badgeStyle: BadgeStyle(
                   badgeColor: Colors.red,
                 ),
-                badgeContent: const Text(
-                  '2',
+                badgeContent: Text(
+                  appData.cartItems.length.toString(),
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 12,

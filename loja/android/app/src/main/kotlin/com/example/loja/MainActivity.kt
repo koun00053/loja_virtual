@@ -1,5 +1,5 @@
-package com.example.loja
+package dagugi.acessorios;
 
 import io.flutter.embedding.android.FlutterActivity
 
-class MainActivity: FlutterActivity()
+class MainActivity : FlutterActivity()

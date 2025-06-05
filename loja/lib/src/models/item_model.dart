@@ -5,8 +5,10 @@ class ItemModel {
   double price;
   String description;
   String size;
+  int    id;
 
   ItemModel({
+    required this.id,
     required this.description,
     required this.imgUrl,
     required this.itemName,

@@ -1,4 +1,3 @@
-import 'package:dagugi_acessorios/src/config/custom_colors.dart';
 import 'package:flutter/material.dart';
 
 class OrderStatusWidget extends StatelessWidget {
@@ -57,7 +56,7 @@ class OrderStatusWidget extends StatelessWidget {
 }
 
 class _CustomDivider extends StatelessWidget {
-  const _CustomDivider({super.key});
+  const _CustomDivider();
 
   @override
   Widget build(BuildContext context) {
@@ -75,8 +74,7 @@ class _CustomDivider extends StatelessWidget {
 
 class _StatusDot extends StatelessWidget {
   const _StatusDot(
-      {super.key,
-      required this.isActive,
+      {required this.isActive,
       required this.title,
       this.backgroundColor});
 

@@ -4,6 +4,7 @@ import 'package:dagugi_acessorios/src/models/order_model.dart';
 import 'package:dagugi_acessorios/src/models/user_model.dart';
 
 ItemModel Alianca_Tradicional = ItemModel(
+  id : 0,
   description: 'Aliança Tradicional Dourado',
   imgUrl: 'assets/images/products/alianca/alianca_tradicional.png',
   itemName: 'Aliança Tradicional',
@@ -12,6 +13,7 @@ ItemModel Alianca_Tradicional = ItemModel(
   size: '22',
 );
 ItemModel Anel_Prata = ItemModel(
+  id : 1,
   description: 'Anel de Prata',
   imgUrl: 'assets/images/products/anel/anel_prata.png',
   itemName: 'Anel De Prata',
@@ -20,6 +22,7 @@ ItemModel Anel_Prata = ItemModel(
   size: '24',
 );
 ItemModel Brinco_Prata = ItemModel(
+  id : 2,
   description: 'Brinco de Prata',
   imgUrl: 'assets/images/products/brinco/brinco_prata.png',
   itemName: 'Brinco de Prata',
@@ -28,6 +31,7 @@ ItemModel Brinco_Prata = ItemModel(
   size: '22',
 );
 ItemModel Colar_Prata_Feminino = ItemModel(
+  id : 3,
   description: 'Colar de Prata Feminino',
   imgUrl: 'assets/images/products/colar/colar_feminino.png',
   itemName: 'Colar de Prata Feiminino',
@@ -36,6 +40,7 @@ ItemModel Colar_Prata_Feminino = ItemModel(
   size: '20',
 );
 ItemModel Colar__Prata_Masculino = ItemModel(
+  id : 4,
   description: 'Colar Prata Masculino',
   imgUrl: 'assets/images/products/colar/colar_masculino.png',
   itemName: 'Colar Prata Masculino',
@@ -44,6 +49,7 @@ ItemModel Colar__Prata_Masculino = ItemModel(
   size: '20',
 );
 ItemModel Colar_Dourado = ItemModel(
+  id : 5,
   description: 'Colar Dourado',
   imgUrl: 'assets/images/products/colar/colar_dourado.png',
   itemName: 'Colar Dourado',
@@ -52,6 +58,7 @@ ItemModel Colar_Dourado = ItemModel(
   size: '26',
 );
 ItemModel Pingente_Prata = ItemModel(
+  id : 6,
   description: 'Pingente Prata',
   imgUrl: 'assets/images/products/pingente/pingente_prata.png',
   itemName: 'Pingente Prata',
@@ -60,6 +67,7 @@ ItemModel Pingente_Prata = ItemModel(
   size: '24',
 );
 ItemModel Pulseira_Dourada = ItemModel(
+  id : 7,
   description: 'Pulseira de Dourada',
   imgUrl: 'assets/images/products/pulseira/pulseira_dourada.png',
   itemName: 'Pulseira Dourada',
@@ -91,10 +99,15 @@ List<String> categories = [
 ];
 
 List<CartItemModel> cartItems = [
-  CartItemModel(item: Anel_Prata, quantity: 1),
-  CartItemModel(item: Brinco_Prata, quantity: 1),
-  CartItemModel(item: Alianca_Tradicional, quantity: 1),
+  // CartItemModel(item: Anel_Prata, quantity: 1),
+  // CartItemModel(item: Brinco_Prata, quantity: 1),
+  // CartItemModel(item: Alianca_Tradicional, quantity: 1),
 ];
+
+CartItemModel itemToCartItem(ItemModel item)
+{
+  return CartItemModel(item: item, quantity: 1);
+}
 
 UserModel user = UserModel(
   phone: '99 9 9999-9999',

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class ItemTile extends StatefulWidget {
   final ItemModel item;
-  final void Function(GlobalKey) cartAnimationMethod;
+  final void Function(GlobalKey, ItemModel) cartAnimationMethod;
 
   const ItemTile({
     super.key,
@@ -23,6 +23,8 @@ class _ItemTileState extends State<ItemTile> {
   final GlobalKey imageGk = GlobalKey();
 
   IconData tileIcon = Icons.add_shopping_cart_outlined;
+  bool addedInCart = false;
+  int  imageId = -1;
 
   Future<void> switchIcon() async {
     setState(() => tileIcon = Icons.check);
@@ -31,9 +33,11 @@ class _ItemTileState extends State<ItemTile> {
       const Duration(milliseconds: 1500),
     );
 
+    /*
     setState(
       () => tileIcon = Icons.add_shopping_cart_outlined,
     );
+    */
   }
 
   @override
@@ -95,9 +99,12 @@ class _ItemTileState extends State<ItemTile> {
             right: 8,
             child: GestureDetector(
               onTap: () {
-                switchIcon(); // Muda o ícone para check
-
-                widget.cartAnimationMethod(imageGk); // Chama a animação
+                if (!addedInCart)
+                {
+                  switchIcon(); // Muda o ícone para check
+                  widget.cartAnimationMethod(imageGk, widget.item); // Chama a animação
+                  addedInCart = true;
+                }
               },
               child: Container(
                 decoration: BoxDecoration(

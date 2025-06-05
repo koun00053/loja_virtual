@@ -1,14 +1,9 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:dagugi_acessorios/main.dart';
 import 'package:dagugi_acessorios/src/pages/auth/controller/auth_controller.dart';
 import 'package:dagugi_acessorios/src/pages_routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:dagugi_acessorios/src/pages/common_widgets/custom_text_field.dart';
-import 'package:dagugi_acessorios/src/pages/auth/view/sing_up_screen.dart';
-import 'package:dagugi_acessorios/src/pages/base/base_screen.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_utils/get_utils.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});

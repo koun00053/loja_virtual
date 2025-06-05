@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:dagugi_acessorios/src/pages/common_widgets/custom_text_field.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 //SignUpScreen Texto Cadastro

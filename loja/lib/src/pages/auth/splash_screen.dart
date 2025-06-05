@@ -1,7 +1,12 @@
+import 'dart:io';
+
+import 'package:dagugi_acessorios/src/pages/base/base_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:dagugi_acessorios/src/pages/auth/sign_in_screen.dart';
+import '../../firebase/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -15,10 +20,20 @@ class _SplashScreenState extends State<SplashScreen> {
 
   _navigateToSignIn() async {
     await Future.delayed(Duration(seconds: 2), () {});
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => SignInScreen()),
-    );
+    if (Platform.isAndroid)
+    {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginScreen()),
+      );
+    }
+    else
+    {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => BaseScreen()),
+      );
+    }
   }
 
   @override
