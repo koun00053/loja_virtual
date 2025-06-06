@@ -2,6 +2,7 @@ import 'package:dagugi_acessorios/src/models/item_model.dart';
 import 'package:dagugi_acessorios/src/pages/product/product_screen.dart';
 import 'package:dagugi_acessorios/src/services/utils_services.dart';
 import 'package:flutter/material.dart';
+import 'package:dagugi_acessorios/src/config/app_data.dart' as appData;
 
 class ItemTile extends StatefulWidget {
   final ItemModel item;
@@ -22,22 +23,10 @@ class _ItemTileState extends State<ItemTile> {
 
   final GlobalKey imageGk = GlobalKey();
 
-  IconData tileIcon = Icons.add_shopping_cart_outlined;
-  bool addedInCart = false;
-  int  imageId = -1;
-
-  Future<void> switchIcon() async {
-    setState(() => tileIcon = Icons.check);
-
-    await Future.delayed(
-      const Duration(milliseconds: 1500),
-    );
-
-    /*
-    setState(
-      () => tileIcon = Icons.add_shopping_cart_outlined,
-    );
-    */
+  IconData getIcon()
+  {
+    bool isInCart = appData.isExsitInCart(widget.item.itemName);
+    return isInCart ? Icons.check: Icons.add_shopping_cart_outlined;
   }
 
   @override
@@ -99,12 +88,9 @@ class _ItemTileState extends State<ItemTile> {
             right: 8,
             child: GestureDetector(
               onTap: () {
-                if (!addedInCart)
-                {
-                  switchIcon(); // Muda o ícone para check
+                setState(() {
                   widget.cartAnimationMethod(imageGk, widget.item); // Chama a animação
-                  addedInCart = true;
-                }
+                });
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -120,7 +106,7 @@ class _ItemTileState extends State<ItemTile> {
                 ),
                 padding: const EdgeInsets.all(6),
                 child: Icon(
-                  tileIcon,
+                  getIcon(),
                   color: Colors.black,
                   size: 20,
                 ),

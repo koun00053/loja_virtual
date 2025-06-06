@@ -15,6 +15,22 @@ class _BaseScreenState extends State<BaseScreen> {
   int currentIndex = 0;
   final pageController = PageController();
 
+  void changePage(int index) {
+    setState(() {
+      currentIndex = index;
+    });
+    pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.ease
+    );
+  }
+
+  void moveToCartPage()
+  {
+    changePage(1);
+  }
+  
 //Navigation Bar - Pagina após o login
   @override
   Widget build(BuildContext context) {
@@ -23,7 +39,7 @@ class _BaseScreenState extends State<BaseScreen> {
         physics: const NeverScrollableScrollPhysics(),
         controller: pageController,
         children: [
-          const HomeTab(),
+          HomeTab(onCartPage : moveToCartPage),
           const CartTab(),
           const OrdersTab(),
           const ProfileTab(),
@@ -32,13 +48,7 @@ class _BaseScreenState extends State<BaseScreen> {
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: currentIndex,
           onTap: (index) {
-            setState(() {
-              currentIndex = index;
-              // pageController.jumpToPage(index);
-              pageController.animateToPage(index,
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.ease);
-            });
+            changePage(index);
           },
           backgroundColor: Colors.black,
           type: BottomNavigationBarType.fixed,

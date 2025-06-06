@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dagugi_acessorios/src/pages/base/base_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../firebase/login_screen.dart';
 
@@ -15,25 +16,19 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _navigateToSignIn();
+
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      bool isNeedLogin = user == null;
+      navigateTo(isNeedLogin);
+    });
   }
 
-  _navigateToSignIn() async {
-    await Future.delayed(Duration(seconds: 2), () {});
-    if (Platform.isAndroid)
-    {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => LoginScreen()),
-      );
-    }
-    else
-    {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => BaseScreen()),
-      );
-    }
+  void navigateTo(bool isNeedLogin) async {
+    await Future.delayed(Duration(seconds: 1), () {});
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => (isNeedLogin ? LoginScreen() : BaseScreen()))
+    );
   }
 
   @override

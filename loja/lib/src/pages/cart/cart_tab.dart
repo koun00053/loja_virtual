@@ -14,6 +14,7 @@ class CartTab extends StatefulWidget {
 
 class _CartTabState extends State<CartTab> {
   final UtilsServices utilsServices = UtilsServices();
+  final GlobalKey<_CartTabState> cartTabKey = GlobalKey<_CartTabState>();
 
   void removeItemFromCart(CartItemModel cartITem) {
     setState(() {
@@ -50,6 +51,7 @@ class _CartTabState extends State<CartTab> {
               itemCount: appData.cartItems.length,
               itemBuilder: (_, index) {
                 return CartTile(
+                    parentWidget : this,
                     cartItem: appData.cartItems[index],
                     remove: removeItemFromCart);
               },

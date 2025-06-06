@@ -10,7 +10,9 @@ import 'package:badges/badges.dart';
 import 'package:dagugi_acessorios/src/config/app_data.dart' as appData;
 
 class HomeTab extends StatefulWidget {
-  const HomeTab({super.key});
+  const HomeTab({super.key, required this.onCartPage});
+
+  final Function() onCartPage;
 
   @override
   State<HomeTab> createState() => _HomeTabState();
@@ -19,8 +21,16 @@ class HomeTab extends StatefulWidget {
 class _HomeTabState extends State<HomeTab> {
   String selectedCategory = 'Todos';
   GlobalKey<CartIconKey> globalKeyCartItems = GlobalKey<CartIconKey>();
+  TextEditingController _searchEditController = TextEditingController();
+
+  String _searchText = '';
+
+  List<ItemModel> _selectedItems = [...appData.items];
 
   late Function(GlobalKey) runAddToCardAnimation;
+
+  final UtilsServices utilsServices = UtilsServices();
+  bool isLoading = true;
 
   void itemSelectedCartAnimations(GlobalKey gkImage, ItemModel item) {
     setState(() {
@@ -29,9 +39,23 @@ class _HomeTabState extends State<HomeTab> {
     runAddToCardAnimation(gkImage);
   }
 
-  final UtilsServices utilsServices = UtilsServices();
-  bool isLoading = true;
-
+  void updateSelectedItems()
+  {
+    if (_searchText.isNotEmpty)
+    {
+      _selectedItems.clear();
+      for (int i = 0; i < appData.items.length; i++)
+      {
+        if (appData.items[i].itemName.toLowerCase().contains(_searchText.toLowerCase())) {
+          _selectedItems.add(appData.items[i]);
+        }
+      }
+    }
+    else {
+      _selectedItems = [...appData.items];
+    }
+  }
+  
   @override
   void initState() {
     // TODO: implement initState
@@ -88,13 +112,15 @@ class _HomeTabState extends State<HomeTab> {
               right: 15,
             ),
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                widget.onCartPage();
+              },
               child: Badge(
                 badgeStyle: BadgeStyle(
                   badgeColor: Colors.red,
                 ),
                 badgeContent: Text(
-                  appData.cartItems.length.toString(),
+                  appData.getCartItemCount().toString(),
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 12,
@@ -129,6 +155,13 @@ class _HomeTabState extends State<HomeTab> {
                 vertical: 10,
               ),
               child: TextFormField(
+                controller: _searchEditController,
+                onChanged: (text) {
+                  setState(() {
+                    _searchText = text; // Update the input text on change
+                    updateSelectedItems();
+                });
+              },
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.grey.shade200,
@@ -204,10 +237,10 @@ class _HomeTabState extends State<HomeTab> {
                               mainAxisSpacing: 10,
                               crossAxisSpacing: 10,
                               childAspectRatio: 9 / 11.5),
-                      itemCount: appData.items.length,
+                      itemCount: _selectedItems.length,
                       itemBuilder: (_, index) {
                         return ItemTile(
-                          item: appData.items[index],
+                          item: _selectedItems[index],
                           cartAnimationMethod: itemSelectedCartAnimations,
                         );
                       },

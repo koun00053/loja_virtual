@@ -109,6 +109,28 @@ CartItemModel itemToCartItem(ItemModel item)
   return CartItemModel(item: item, quantity: 1);
 }
 
+int getCartItemCount()
+{
+  int nCount = 0;
+  for (int i = 0; i < cartItems.length; i++) {
+    nCount += cartItems[i].quantity;
+  }
+  return nCount;
+}
+
+bool isExsitInCart(String itemName)
+{
+  bool exist = false;
+  for (int i = 0; i < cartItems.length; i++) {
+    if (itemName == cartItems[i].item.itemName)
+    {
+      exist = true;
+      break;
+    }
+  }
+  return exist;
+}
+
 UserModel user = UserModel(
   phone: '99 9 9999-9999',
   cpf: '999.999.999-99',
@@ -156,3 +178,4 @@ List<OrderModel> orders = [
       total: 150.00,
       id: '1'),
 ];
+

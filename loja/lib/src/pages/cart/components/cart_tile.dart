@@ -1,14 +1,16 @@
 import 'package:dagugi_acessorios/src/models/cart_item_model.dart';
+import 'package:dagugi_acessorios/src/pages/cart/cart_tab.dart';
 import 'package:dagugi_acessorios/src/pages/common_widgets/quantity_widget.dart';
 import 'package:dagugi_acessorios/src/services/utils_services.dart';
 import 'package:flutter/material.dart';
 
 class CartTile extends StatefulWidget {
+  final State<CartTab> parentWidget;
   final CartItemModel cartItem;
   final Function(CartItemModel) remove;
 
   const CartTile({
-    super.key,
+    required this.parentWidget,
     required this.cartItem,
     required this.remove,
   });
@@ -60,6 +62,8 @@ class _CartTileState extends State<CartTile> {
                 //REMOVER ITEM CARRINHO
                 widget.remove(widget.cartItem);
               }
+
+              widget.parentWidget.setState((){});
             });
           },
           isRemovable: true,
