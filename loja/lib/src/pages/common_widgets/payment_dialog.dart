@@ -2,6 +2,7 @@ import 'package:dagugi_acessorios/src/models/order_model.dart';
 import 'package:dagugi_acessorios/src/services/utils_services.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:dagugi_acessorios/src/config/app_data.dart' as appData;
 
 class PaymentDialog extends StatelessWidget {
   final OrderModel order;

@@ -21,7 +21,7 @@ class HomeTab extends StatefulWidget {
 class _HomeTabState extends State<HomeTab> {
   String selectedCategory = 'Todos';
   GlobalKey<CartIconKey> globalKeyCartItems = GlobalKey<CartIconKey>();
-  TextEditingController _searchEditController = TextEditingController();
+  final TextEditingController _searchEditController = TextEditingController();
 
   String _searchText = '';
 

@@ -1,4 +1,5 @@
 import 'package:dagugi_acessorios/src/models/cart_item_model.dart';
+import 'package:dagugi_acessorios/src/models/order_model.dart';
 import 'package:dagugi_acessorios/src/pages/cart/components/cart_tile.dart';
 import 'package:dagugi_acessorios/src/pages/common_widgets/payment_dialog.dart';
 import 'package:dagugi_acessorios/src/services/utils_services.dart';
@@ -22,15 +23,6 @@ class _CartTabState extends State<CartTab> {
       utilsServices.showToast(
           message: '${cartITem.item.itemName} removido do carrinho');
     });
-  }
-
-  double cartTotalPrice() {
-    double total = 0;
-
-    for (var item in appData.cartItems) {
-      total += item.totalPrice();
-    }
-    return total;
   }
 
   @override
@@ -81,7 +73,7 @@ class _CartTabState extends State<CartTab> {
                   style: TextStyle(fontSize: 14, fontFamily: 'Garamond'),
                 ),
                 Text(
-                  utilsServices.priceToCurrency(cartTotalPrice()),
+                  utilsServices.priceToCurrency(appData.cartTotalPrice()),
                   style: TextStyle(
                     fontSize: 23,
                     color: Colors.black,
@@ -95,10 +87,13 @@ class _CartTabState extends State<CartTab> {
                       bool? result = await showOrderConfirmation();
                       if (result ?? false) {
                         showDialog(
-                            context: context,
-                            builder: (_) {
-                              return PaymentDialog(order: appData.orders.first);
-                            });
+                          context: context,
+                          builder: (_) {
+                            OrderModel order = appData.orderFromCart();
+                            appData.orders.insert(0, order);
+                            return PaymentDialog(order: order);
+                          }
+                        );
                       } else {
                         utilsServices.showToast(
                             message: 'Pedido não confirmado', isError: true);

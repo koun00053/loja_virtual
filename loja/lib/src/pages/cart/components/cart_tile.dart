@@ -9,7 +9,7 @@ class CartTile extends StatefulWidget {
   final CartItemModel cartItem;
   final Function(CartItemModel) remove;
 
-  const CartTile({
+  const CartTile({super.key, 
     required this.parentWidget,
     required this.cartItem,
     required this.remove,

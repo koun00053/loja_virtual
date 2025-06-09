@@ -139,43 +139,30 @@ UserModel user = UserModel(
   password: '',
 );
 
-//Teste Tela Pedidos
-//Pedido 1
+double cartTotalPrice() {
+  double total = 0;
+
+  for (var item in cartItems) {
+    total += item.totalPrice();
+  }
+  return total;
+}
+
 List<OrderModel> orders = [
-  OrderModel(
-      copyAndPaste: 'Pedido 1',
-      createdDateTime: DateTime.parse('2025-10-01 12:00:00'),
-      overdueDateTime: DateTime.parse('2025-10-05 12:00:00'),
-      items: [
-        CartItemModel(
-          item: Alianca_Tradicional,
-          quantity: 2,
-        ),
-        CartItemModel(
-          item: Alianca_Tradicional,
-          quantity: 2,
-        )
-      ],
-      status: 'pending_payment',
-      total: 120.00,
-      id: '1'),
-  //Pedido 2
-  OrderModel(
-      copyAndPaste: 'Pedido 2',
-      createdDateTime: DateTime.parse('2025-10-01 12:00:00'),
-      overdueDateTime: DateTime.parse('2025-10-05 12:00:00'),
-      items: [
-        CartItemModel(
-          item: Alianca_Tradicional,
-          quantity: 2,
-        ),
-        CartItemModel(
-          item: Alianca_Tradicional,
-          quantity: 2,
-        )
-      ],
-      status: 'delivered',
-      total: 150.00,
-      id: '1'),
+  
 ];
 
+OrderModel orderFromCart()
+{
+  int nOrderIndex = orders.length + 1;
+  DateTime createdDateTime = DateTime.now();
+  DateTime overdueDateTime = createdDateTime.add(const Duration(days:1));
+  return OrderModel(
+    copyAndPaste: 'Pedido $nOrderIndex',
+    createdDateTime: createdDateTime,
+    overdueDateTime: overdueDateTime,
+    items: cartItems,
+    status: 'pending_payment',
+    total: cartTotalPrice(),
+    id: '$nOrderIndex');
+}  

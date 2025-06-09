@@ -18,6 +18,8 @@ class _ProfileTabState extends State<ProfileTab> {
 
   @override
   Widget build(BuildContext context) {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    User? user = auth.currentUser;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -43,14 +45,14 @@ class _ProfileTabState extends State<ProfileTab> {
         children: [
           CustomTextField(
             readOnly: true,
-            initialValue: appData.user.name,
+            initialValue: user == null ? appData.user.name : user.displayName,
             icon: Icons.person,
             label: 'Nome',
             controller: null,
           ),
           CustomTextField(
             readOnly: true,
-            initialValue: appData.user.email,
+            initialValue: user == null ? appData.user.email : user.email,
             icon: Icons.email,
             label: 'Email',
             controller: null,
@@ -58,7 +60,7 @@ class _ProfileTabState extends State<ProfileTab> {
           ),
           CustomTextField(
             readOnly: true,
-            initialValue: appData.user.phone,
+            initialValue: user == null ? appData.user.phone : user.phoneNumber,
             icon: Icons.phone,
             label: 'Celular',
             controller: null,
@@ -152,8 +154,8 @@ class _ProfileTabState extends State<ProfileTab> {
                           ),
                         ),
                         onPressed: () async{
-                          final FirebaseAuth _auth = FirebaseAuth.instance;
-                          User? user = _auth.currentUser;
+                          final FirebaseAuth auth = FirebaseAuth.instance;
+                          User? user = auth.currentUser;
                           if (user != null) {
                             changePassword(context);
                           }  
@@ -203,8 +205,8 @@ class _ProfileTabState extends State<ProfileTab> {
       'unknown': 'Ocorreu um erro desconhecido.',
     };
 
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    User? user = _auth.currentUser;
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    User? user = auth.currentUser;
 
     // Check if the fields are empty
     if (_currentPasswordController.text.isEmpty || 
@@ -238,10 +240,11 @@ class _ProfileTabState extends State<ProfileTab> {
         // Handle re-authentication errors
         if (e is FirebaseAuthException) {
           String? errorMessage = firebaseAuthErrorMessages[e.code];
-          if (errorMessage != null)
+          if (errorMessage != null) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(errorMessage)));
-          else
+          } else {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('erro: ${e.message}')));
+          }
         } else {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Ocorreu um erro desconhecido.')));
         }
