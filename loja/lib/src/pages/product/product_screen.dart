@@ -1,3 +1,4 @@
+import 'package:dagugi_acessorios/src/config/app_data.dart' as appData;
 import 'package:dagugi_acessorios/src/models/item_model.dart';
 import 'package:dagugi_acessorios/src/pages/common_widgets/quantity_widget.dart';
 import 'package:dagugi_acessorios/src/services/utils_services.dart';
@@ -124,7 +125,10 @@ class _ProductScreenState extends State<ProductScreen> {
                                     borderRadius: BorderRadius.circular(15),
                                   ),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  appData.cartItems.add(appData.itemToCartItem(widget.item, cartItemQuantity));
+                                  Navigator.pop(context, "update data");
+                                },
                                 label: const Text(
                                   'Adicionar Ao Carrinho',
                                   style: TextStyle(

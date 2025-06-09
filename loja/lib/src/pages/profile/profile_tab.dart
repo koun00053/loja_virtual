@@ -45,14 +45,14 @@ class _ProfileTabState extends State<ProfileTab> {
         children: [
           CustomTextField(
             readOnly: true,
-            initialValue: user == null ? appData.user.name : user.displayName,
+            initialValue: appData.user.name,
             icon: Icons.person,
             label: 'Nome',
             controller: null,
           ),
           CustomTextField(
             readOnly: true,
-            initialValue: user == null ? appData.user.email : user.email,
+            initialValue: appData.user.email,
             icon: Icons.email,
             label: 'Email',
             controller: null,
@@ -60,7 +60,7 @@ class _ProfileTabState extends State<ProfileTab> {
           ),
           CustomTextField(
             readOnly: true,
-            initialValue: user == null ? appData.user.phone : user.phoneNumber,
+            initialValue: appData.user.phone,
             icon: Icons.phone,
             label: 'Celular',
             controller: null,

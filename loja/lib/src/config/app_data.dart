@@ -11,6 +11,7 @@ ItemModel Alianca_Tradicional = ItemModel(
   price: 60.00,
   unit: 'un',
   size: '22',
+  category: 'Alianças'
 );
 ItemModel Anel_Prata = ItemModel(
   id : 1,
@@ -20,7 +21,9 @@ ItemModel Anel_Prata = ItemModel(
   price: 70.00,
   unit: 'un',
   size: '24',
+  category: 'Anéis'
 );
+
 ItemModel Brinco_Prata = ItemModel(
   id : 2,
   description: 'Brinco de Prata',
@@ -29,6 +32,7 @@ ItemModel Brinco_Prata = ItemModel(
   price: 35.00,
   unit: 'un',
   size: '22',
+  category: 'Brincos'
 );
 ItemModel Colar_Prata_Feminino = ItemModel(
   id : 3,
@@ -38,6 +42,7 @@ ItemModel Colar_Prata_Feminino = ItemModel(
   price: 45.00,
   unit: 'un',
   size: '20',
+  category: 'Colares'
 );
 ItemModel Colar__Prata_Masculino = ItemModel(
   id : 4,
@@ -47,6 +52,7 @@ ItemModel Colar__Prata_Masculino = ItemModel(
   price: 50.00,
   unit: 'un',
   size: '20',
+  category: 'Colares'
 );
 ItemModel Colar_Dourado = ItemModel(
   id : 5,
@@ -56,6 +62,7 @@ ItemModel Colar_Dourado = ItemModel(
   price: 15.00,
   unit: 'un',
   size: '26',
+  category: 'Colares'
 );
 ItemModel Pingente_Prata = ItemModel(
   id : 6,
@@ -65,6 +72,7 @@ ItemModel Pingente_Prata = ItemModel(
   price: 20.00,
   unit: 'un',
   size: '24',
+  category: 'Pingentes'
 );
 ItemModel Pulseira_Dourada = ItemModel(
   id : 7,
@@ -74,6 +82,7 @@ ItemModel Pulseira_Dourada = ItemModel(
   price: 18.00,
   unit: 'un',
   size: '24',
+  category: 'Pulseira'
 );
 
 List<ItemModel> items = [
@@ -104,9 +113,9 @@ List<CartItemModel> cartItems = [
   // CartItemModel(item: Alianca_Tradicional, quantity: 1),
 ];
 
-CartItemModel itemToCartItem(ItemModel item)
+CartItemModel itemToCartItem(ItemModel item, int count)
 {
-  return CartItemModel(item: item, quantity: 1);
+  return CartItemModel(item: item, quantity: count);
 }
 
 int getCartItemCount()

@@ -7,11 +7,13 @@ import 'package:dagugi_acessorios/src/config/app_data.dart' as appData;
 class ItemTile extends StatefulWidget {
   final ItemModel item;
   final void Function(GlobalKey, ItemModel) cartAnimationMethod;
+  final void Function() needToUpdate;
 
   const ItemTile({
     super.key,
     required this.item,
     required this.cartAnimationMethod,
+    required this.needToUpdate
   });
 
   @override
@@ -41,12 +43,17 @@ class _ItemTileState extends State<ItemTile> {
           // GestureDetector
           InkWell(
             borderRadius: BorderRadius.circular(20),
-            onTap: () {
-              Navigator.of(context).push(
+            onTap: () async{
+              final result = await Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => ProductScreen(item: widget.item),
                 ),
               );
+
+              if (result != null)
+              {
+                widget.needToUpdate();
+              }
             },
             child: Padding(
               padding: const EdgeInsets.all(12),

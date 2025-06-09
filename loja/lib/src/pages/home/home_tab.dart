@@ -19,7 +19,7 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
-  String selectedCategory = 'Todos';
+  String selectedCategory = appData.categories[0];
   GlobalKey<CartIconKey> globalKeyCartItems = GlobalKey<CartIconKey>();
   final TextEditingController _searchEditController = TextEditingController();
 
@@ -34,7 +34,7 @@ class _HomeTabState extends State<HomeTab> {
 
   void itemSelectedCartAnimations(GlobalKey gkImage, ItemModel item) {
     setState(() {
-      appData.cartItems.add(appData.itemToCartItem(item));  
+      appData.cartItems.add(appData.itemToCartItem(item, 1));  
     });
     runAddToCardAnimation(gkImage);
   }
@@ -54,8 +54,31 @@ class _HomeTabState extends State<HomeTab> {
     else {
       _selectedItems = [...appData.items];
     }
+
+    String category = selectedCategory == appData.categories[0] ? '' : selectedCategory;
+    if (category.isEmpty)
+    {
+      return;
+    }
+    
+    List<ItemModel> categoryItems = [..._selectedItems];
+    _selectedItems.clear();
+    for (int i = 0; i < categoryItems.length; i++)
+    {
+      if (categoryItems[i].category.toLowerCase() == category.toLowerCase())
+      {
+        _selectedItems.add(categoryItems[i]);
+      }
+    }
   }
   
+  void updateData()
+  {
+    setState(() {
+      
+    });
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -198,11 +221,11 @@ class _HomeTabState extends State<HomeTab> {
                           onPressed: () {
                             setState(() {
                               selectedCategory = appData.categories[index];
+                              updateSelectedItems();
                             });
                           },
                           category: appData.categories[index],
-                          isSelected:
-                              appData.categories[index] == selectedCategory,
+                          isSelected: appData.categories[index] == selectedCategory,
                         );
                       },
                       separatorBuilder: (_, index) => const SizedBox(
@@ -242,6 +265,7 @@ class _HomeTabState extends State<HomeTab> {
                         return ItemTile(
                           item: _selectedItems[index],
                           cartAnimationMethod: itemSelectedCartAnimations,
+                          needToUpdate: updateData,
                         );
                       },
                     )

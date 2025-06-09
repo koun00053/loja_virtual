@@ -6,6 +6,7 @@ class ItemModel {
   String description;
   String size;
   int    id;
+  String category;
 
   ItemModel({
     required this.id,
@@ -15,5 +16,6 @@ class ItemModel {
     required this.price,
     required this.unit,
     required this.size,
+    required this.category
   });
 }

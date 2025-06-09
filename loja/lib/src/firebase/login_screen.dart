@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dagugi_acessorios/src/config/app_data.dart' as appData;
 import 'package:dagugi_acessorios/src/firebase/signup_page.dart';
 import 'package:dagugi_acessorios/src/pages/base/base_screen.dart';
 import 'package:flutter/material.dart';
@@ -33,10 +35,20 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_formKey.currentState!.validate()) {
       setState(() => _isLoading = true);
       try {
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
+        UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _emailController.text.trim(),
           password: _passwordController.text,
         );
+
+        appData.user.email = userCredential.user!.email!;
+        
+        DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection('users').doc(userCredential.user!.uid).get();
+        if (userDoc.exists) {
+          appData.user.name = userDoc['name'];
+          appData.user.phone = userDoc['phonenumber'];
+          appData.user.cpf = userDoc['cpf'];
+        }
+      
         // Navigate to home screen or handle successful login
         Navigator.pushReplacement(
           context,
